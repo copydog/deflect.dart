@@ -9,12 +9,18 @@ class FieldReflectionData {
 
   int _fieldAccessorId;
 
+  int _isEnumConstant;
+
+  int _isSynthetic;
+
   FieldReflectionData(
     this._classId,
     this._modifiers,
     this._fieldNameId,
     this._fieldTypeId,
     this._fieldAccessorId,
+    this._isEnumConstant,
+    this._isSynthetic,
   );
 
   List toJson() => {

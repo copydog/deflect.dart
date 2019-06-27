@@ -1,4 +1,5 @@
-import '../../class.dart';
+import 'package:deflect/src/class.dart';
+
 import 'annotation.dart';
 
 class AnnotationType {

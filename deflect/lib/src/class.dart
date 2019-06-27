@@ -17,7 +17,7 @@ class Class<T> implements AnnotatedElement {
   T t1;
 
   Class([T obj]) {
-    _classId = ReflectionDataManager.getClassId(T);
+    _classId = ReflectionDataManager.getClassTypeId(T);
   }
 
   Class.forId(this._classId);

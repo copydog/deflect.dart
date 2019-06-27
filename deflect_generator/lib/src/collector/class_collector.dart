@@ -75,6 +75,8 @@ class ClassCollector {
                 StringDictManager.registerString(e.name),
                 -1,
                 FieldAccessorDictManager.registerAccessor(e.name),
+                e.isEnumConstant ? 1 : 0,
+                e.isSynthetic ? 1 : 0,
               ),
         )
         .toList();
@@ -87,6 +89,8 @@ class ClassCollector {
                 StringDictManager.registerString(e.name),
                 -1,
                 FieldAccessorDictManager.registerAccessor(e.name),
+                e.isEnumConstant ? 1 : 0,
+                e.isSynthetic ? 1 : 0,
               ),
         )
         .toList();

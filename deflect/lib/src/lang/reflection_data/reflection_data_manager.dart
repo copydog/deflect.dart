@@ -32,13 +32,13 @@ class ReflectionDataManager {
     _classReflectionData = classReflectionData;
   }
 
-  static int getClassId(Type classType) {
+  static int getClassTypeId(Type classType) {
     int id = _classIdDict.indexOf(classType);
     assert(id != -1, "Id of Class $classType is NOT found in reflection data.");
     return id;
   }
 
-  static Type getClassById(int classId) {
+  static Type getClassTypeById(int classId) {
     Type type = _classIdDict[classId];
     assert(type != null, "Class of Id $classId is NOT found in reflection data.");
     return type;

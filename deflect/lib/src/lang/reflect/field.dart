@@ -4,13 +4,11 @@ import 'package:deflect/src/lang/reflection_data/reflection_data_manager.dart';
 import 'member.dart';
 
 class Field implements Member {
-  int get _accessorId => _fieldInfo[FieldReflectionDataConstants.ACCESSOR_ID];
+  int get _accessorId => _fieldRD[FieldReflectionDataConstants.ACCESSOR_ID];
 
-  List<dynamic> _fieldInfo = [];
+  List<dynamic> _fieldRD = [];
 
-  Class _class;
-
-  Field(this._fieldInfo);
+  Field(this._fieldRD);
 
   bool equals(Object obj) {
     if (obj != null && obj is Field) {
@@ -36,9 +34,7 @@ class Field implements Member {
     return null;
   }
 
-  bool isEnumConstant() {
-    return null;
-  }
+  bool isEnumConstant() => _fieldRD[FieldReflectionDataConstants.IS_ENUM_CONSTANT] == 1;
 
   void set(Object obj, Object value) {
     ReflectionDataManager.getFieldSetter(_accessorId)(obj, value);
@@ -62,21 +58,23 @@ class Field implements Member {
 
   @override
   Class getDeclaringClass() {
-    return _class;
+    return null;
   }
 
   @override
   int getModifiers() {
-    return _fieldInfo[2];
+    return _fieldRD[FieldReflectionDataConstants.MODIFIERS];
   }
 
   @override
   String getName() {
-    return _fieldInfo[1];
+    return ReflectionDataManager.getStringById(
+      _fieldRD[FieldReflectionDataConstants.FIELD_NAME_ID],
+    );
   }
 
   @override
   bool isSynthetic() {
-    return _fieldInfo[3] == 1;
+    return _fieldRD[FieldReflectionDataConstants.IS_SYNTHETIC] == 1;
   }
 }
