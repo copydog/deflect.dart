@@ -2,10 +2,7 @@ class A<T> {}
 
 class B extends A {}
 
-void main() {
-  dynamic c = C();
-  c.dynamicInvocation();
-}
+void main() {}
 
 var fa = Function.apply;
 

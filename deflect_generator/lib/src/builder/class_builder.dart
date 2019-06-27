@@ -18,10 +18,6 @@ class ClassBuilder extends Generator {
       ClassCollector.collect(class_);
     }
 
-    print(ClassDictManager.getTemplate());
-    print(StringDictManager.getTemplate());
-    print(AccessorDictManager.getTemplate());
-
     return null;
   }
 }

@@ -8,5 +8,5 @@ Builder defaultBuilder(BuilderOptions options) => SharedPartBuilder(
         ClassBuilder(),
         PostBuilder(),
       ],
-      'deflection_builder',
+      'deflect_builder',
     );

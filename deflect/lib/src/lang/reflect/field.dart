@@ -1,16 +1,64 @@
-import '../../class.dart';
+import 'package:deflect/src/class.dart';
+import 'package:deflect/src/lang/constant/field_reflection_data_constants.dart';
+import 'package:deflect/src/lang/reflection_data/reflection_data_manager.dart';
 import 'member.dart';
 
 class Field implements Member {
-  Map _fieldInfo = {
-    1: "fieldName",
-    2: 1111,
-    3: 1,
-  };
+  int get _fieldId => _fieldInfo[4];
+
+  List<dynamic> _fieldInfo = [];
 
   Class _class;
 
-  Field(this._fieldInfo, this._class);
+  Field(this._fieldInfo);
+
+//  bool equals(Object obj) {
+//    if (obj != null && obj is Field) {
+//      Field other = obj;
+//      return (getDeclaringClass() == other.getDeclaringClass()) &&
+//          (getName() == other.getName()) &&
+//          (getType() == other.getType());
+//    }
+//    return false;
+//  }
+
+  Object get(Object obj) {
+    return ReflectionDataManager.getFieldGetter(_fieldId)(obj);
+  }
+
+  bool getBoolean(Object obj) => get(obj);
+
+  int getInt(Object obj) => get(obj);
+
+  double getDouble(Object obj) => get(obj);
+
+  Class getType() {
+    return null;
+  }
+
+  bool isEnumConstant() {
+    return null;
+  }
+
+  void set(Object obj, Object value) {
+    ReflectionDataManager.getFieldSetter(_fieldId)(obj, value);
+  }
+
+  void setBoolean(Object obj, bool z) => set(obj, z);
+
+  void setDouble(Object obj, bool d) => set(obj, d);
+
+  String toGenericString() {
+    return null;
+  }
+
+  String toString() {
+    return "";
+  }
+
+  //---------------------------------------------------------------------
+  // Implementation of Member
+  //---------------------------------------------------------------------
 
   @override
   Class getDeclaringClass() {

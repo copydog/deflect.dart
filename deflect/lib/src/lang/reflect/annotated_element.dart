@@ -296,17 +296,17 @@ abstract class AnnotatedElement {
           */
     List<T> result = getDeclaredAnnotationsByType(annotationClass);
 
-    if (result.length == 0 && // Neither directly nor indirectly present
-        this is Class && // the element is a class
-        AnnotationType.getInstance(annotationClass).isInherited()) {
-      // Inheritable
-      Class superClass = (this as Class).getSuperclass();
-      if (superClass != null) {
-        // Determine if the annotation is associated with the
-        // superclass
-        result = superClass.getAnnotationsByType(annotationClass);
-      }
-    }
+//    if (result.length == 0 && // Neither directly nor indirectly present
+//        this is Class && // the element is a class
+//        AnnotationType.getInstance(annotationClass).isInherited()) {
+//      // Inheritable
+//      Class superClass = (this as Class).getSuperclass();
+//      if (superClass != null) {
+//        // Determine if the annotation is associated with the
+//        // superclass
+//        result = superClass.getAnnotationsByType(annotationClass);
+//      }
+//    }
 
     return result;
   }
@@ -334,13 +334,13 @@ abstract class AnnotatedElement {
   T getDeclaredAnnotation<T extends Annotation>(Class<T> annotationClass) {
 //    Objects.requireNonNull(annotationClass);
     // Loop over all directly-present annotations looking for a matching one
-    for (Annotation annotation in getDeclaredAnnotations()) {
-      if (annotationClass.equals(annotation.annotationType())) {
-        // More robust to do a dynamic cast at runtime instead
-        // of compile-time only.
-        return annotationClass.cast(annotation);
-      }
-    }
+//    for (Annotation annotation in getDeclaredAnnotations()) {
+//      if (annotationClass.equals(annotation.annotationType())) {
+//        // More robust to do a dynamic cast at runtime instead
+//        // of compile-time only.
+//        return annotationClass.cast(annotation);
+//      }
+//    }
     return null;
   }
 
