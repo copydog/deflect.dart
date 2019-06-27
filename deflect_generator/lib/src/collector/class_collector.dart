@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
-import 'package:deflect_generator/src/manager/field_getter_dict_manager.dart';
+import 'package:deflect_generator/src/manager/field_accessor_dict_manager.dart';
 import 'package:deflect_generator/src/manager/class_dict_manager.dart';
 import 'package:deflect_generator/src/manager/class_reflection_data_manager.dart';
 import 'package:deflect_generator/src/manager/string_dict_manager.dart';
@@ -21,7 +21,7 @@ class ClassCollector {
     int classId = ClassDictManager.registerClass(
       class_.id,
       class_.name,
-      class_.source.uri.toString().replaceFirst("asset", "package"),
+      class_.source.uri.toString().replaceFirst("asset", "package").replaceFirst("lib/", ""),
     );
     ClassElement superTypeElement = class_.supertype?.element;
 
@@ -34,7 +34,10 @@ class ClassCollector {
       superTypeId = ClassDictManager.registerClass(
         superTypeElement.id,
         superTypeElement.name,
-        superTypeElement.source.uri.toString().replaceFirst("asset", "package"),
+        superTypeElement.source.uri
+            .toString()
+            .replaceFirst("asset", "package")
+            .replaceFirst("lib/", ""),
       );
     }
 
@@ -53,7 +56,10 @@ class ClassCollector {
           (e) => ClassDictManager.registerClass(
                 e.element.id,
                 e.element.name,
-                e.element.source.uri.toString().replaceFirst("asset", "package"),
+                e.element.source.uri
+                    .toString()
+                    .replaceFirst("asset", "package")
+                    .replaceFirst("lib/", ""),
               ),
         )
         .toList();
@@ -68,7 +74,7 @@ class ClassCollector {
                 0x000001,
                 StringDictManager.registerString(e.name),
                 -1,
-                FieldGetterDictManager.registerAccessor(e.name),
+                FieldAccessorDictManager.registerAccessor(e.name),
               ),
         )
         .toList();
@@ -80,7 +86,7 @@ class ClassCollector {
                 0x000001,
                 StringDictManager.registerString(e.name),
                 -1,
-                FieldGetterDictManager.registerAccessor(e.name),
+                FieldAccessorDictManager.registerAccessor(e.name),
               ),
         )
         .toList();

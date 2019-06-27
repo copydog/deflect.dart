@@ -4,7 +4,7 @@ import 'package:deflect/src/lang/reflection_data/reflection_data_manager.dart';
 import 'member.dart';
 
 class Field implements Member {
-  int get _fieldId => _fieldInfo[4];
+  int get _accessorId => _fieldInfo[FieldReflectionDataConstants.ACCESSOR_ID];
 
   List<dynamic> _fieldInfo = [];
 
@@ -12,18 +12,18 @@ class Field implements Member {
 
   Field(this._fieldInfo);
 
-//  bool equals(Object obj) {
-//    if (obj != null && obj is Field) {
-//      Field other = obj;
-//      return (getDeclaringClass() == other.getDeclaringClass()) &&
-//          (getName() == other.getName()) &&
-//          (getType() == other.getType());
-//    }
-//    return false;
-//  }
+  bool equals(Object obj) {
+    if (obj != null && obj is Field) {
+      Field other = obj;
+      return (getDeclaringClass() == other.getDeclaringClass()) &&
+          (getName() == other.getName()) &&
+          (getType() == other.getType());
+    }
+    return false;
+  }
 
   Object get(Object obj) {
-    return ReflectionDataManager.getFieldGetter(_fieldId)(obj);
+    return ReflectionDataManager.getFieldGetter(_accessorId)(obj);
   }
 
   bool getBoolean(Object obj) => get(obj);
@@ -41,7 +41,7 @@ class Field implements Member {
   }
 
   void set(Object obj, Object value) {
-    ReflectionDataManager.getFieldSetter(_fieldId)(obj, value);
+    ReflectionDataManager.getFieldSetter(_accessorId)(obj, value);
   }
 
   void setBoolean(Object obj, bool z) => set(obj, z);

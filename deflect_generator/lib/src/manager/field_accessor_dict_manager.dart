@@ -1,4 +1,4 @@
-class FieldGetterDictManager {
+class FieldAccessorDictManager {
   /// indicates next id
   static int _id = 0;
 
@@ -15,8 +15,16 @@ class FieldGetterDictManager {
     return _id++;
   }
 
-  static String getTemplate() {
+  static String getGetterTemplate() {
     return "var fgd = [${_accessorList.map((e) => "(i)=>i.${e}").join(",")}];";
+  }
+
+  static String getSetterTemplate() {
+    return "var fsd = [${_accessorList.map((e) => "(i,d)=>i.${e}=d").join(",")}];";
+  }
+
+  static String getTemplate() {
+    return "${getGetterTemplate()}\n${getSetterTemplate()}";
   }
 }
 

@@ -61,7 +61,7 @@ class ReflectionDataManager {
     List fieldDict =
         _classReflectionData[classId][ClassReflectionDataConstants.DECLARED_PUBLIC_FIELDS];
     return Field(
-      fieldDict.firstWhere((e) => e[FieldReflectionDataConstants.FIELD_NAME] == fieldNameId),
+      fieldDict.firstWhere((e) => e[FieldReflectionDataConstants.FIELD_NAME_ID] == fieldNameId),
     );
   }
 
