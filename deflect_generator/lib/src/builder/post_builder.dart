@@ -1,5 +1,5 @@
 import 'package:build/build.dart';
-import 'package:deflect_generator/src/renderer/accessor_dict_renderer.dart';
+import 'package:deflect_generator/src/renderer/field_getter_dict_renderer.dart';
 import 'package:deflect_generator/src/renderer/class_dict_renderer.dart';
 import 'package:deflect_generator/src/renderer/class_reflection_data_renderer.dart';
 import 'package:deflect_generator/src/renderer/entry_renderer.dart';
@@ -11,7 +11,7 @@ class PostBuilder extends Generator {
   Future<String> generate(LibraryReader library, BuildStep buildStep) {
     ClassDictRenderer.render();
     StringDictRenderer.render();
-    AccessorDictRenderer.render();
+    FieldGetterDictRenderer.render();
     ClassReflectionDataRenderer.render();
     EntryRenderer.render();
   }

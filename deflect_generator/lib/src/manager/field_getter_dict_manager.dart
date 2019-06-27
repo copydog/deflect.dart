@@ -1,4 +1,4 @@
-class AccessorDictManager {
+class FieldGetterDictManager {
   /// indicates next id
   static int _id = 0;
 
@@ -16,7 +16,7 @@ class AccessorDictManager {
   }
 
   static String getTemplate() {
-    return "var ad = [${_accessorList.map((e) => "(i)=>i.${e}").join(",")}];";
+    return "var fgd = [${_accessorList.map((e) => "(i)=>i.${e}").join(",")}];";
   }
 }
 

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
-import 'package:deflect_generator/src/manager/accessor_dict_manager.dart';
+import 'package:deflect_generator/src/manager/field_getter_dict_manager.dart';
 import 'package:deflect_generator/src/manager/class_dict_manager.dart';
 import 'package:deflect_generator/src/manager/class_reflection_data_manager.dart';
 import 'package:deflect_generator/src/manager/string_dict_manager.dart';
@@ -68,7 +68,7 @@ class ClassCollector {
                 0x000001,
                 StringDictManager.registerString(e.name),
                 -1,
-                AccessorDictManager.registerAccessor(e.name),
+                FieldGetterDictManager.registerAccessor(e.name),
               ),
         )
         .toList();
@@ -80,7 +80,7 @@ class ClassCollector {
                 0x000001,
                 StringDictManager.registerString(e.name),
                 -1,
-                AccessorDictManager.registerAccessor(e.name),
+                FieldGetterDictManager.registerAccessor(e.name),
               ),
         )
         .toList();
