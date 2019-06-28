@@ -18,7 +18,7 @@ class ClassCache {
 
   static Class<T> getOrCreate<T>(int id) {
     if (!has(id)) {
-      set(id, Class.forId(id));
+      set(id, Class<T>.forId(id));
     }
     return get(id);
   }

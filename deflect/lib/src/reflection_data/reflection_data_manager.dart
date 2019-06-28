@@ -16,7 +16,7 @@ class ReflectionDataManager {
 
   static List<Object> _methodReferenceDict;
 
-  static List _classReflectionData;
+  static List _classRd;
 
   static void load(
     List<Type> classIdDict,
@@ -30,7 +30,7 @@ class ReflectionDataManager {
     _stringDict = stringDict;
     _fieldGetterDict = fieldGetterDict;
     _fieldSetterDict = fieldSetterDict;
-    _classReflectionData = classReflectionData;
+    _classRd = classReflectionData;
   }
 
   static int getClassTypeId(Type classType) {
@@ -59,7 +59,7 @@ class ReflectionDataManager {
 
   static Field getField(int classId, String fieldName) {
     int fieldNameId = getStringId(fieldName);
-    List rd = _classReflectionData[classId][ClassReflectionDataConstants.DECLARED_PUBLIC_FIELDS];
+    List rd = _classRd[classId][ClassReflectionDataConstants.DECLARED_PUBLIC_FIELDS];
     List fieldRd =
         rd.firstWhere((e) => e[FieldReflectionDataConstants.FIELD_NAME_ID] == fieldNameId);
     return Field(
@@ -75,8 +75,7 @@ class ReflectionDataManager {
 
   static List<Field> getFields(int classId) {
     return List<Field>.from(
-      (_classReflectionData[classId][ClassReflectionDataConstants.DECLARED_PUBLIC_FIELDS] as List)
-          .map(
+      (_classRd[classId][ClassReflectionDataConstants.DECLARED_PUBLIC_FIELDS] as List).map(
         (rd) => Field(
               ClassCache.getOrCreate(rd[FieldReflectionDataConstants.CLASS_ID]),
               0,

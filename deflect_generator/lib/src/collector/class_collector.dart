@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:deflect_generator/src/manager/field_accessor_dict_manager.dart';
-import 'package:deflect_generator/src/manager/class_dict_manager.dart';
+import 'package:deflect_generator/src/manager/type_dict_manager.dart';
 import 'package:deflect_generator/src/manager/class_reflection_data_manager.dart';
 import 'package:deflect_generator/src/manager/string_dict_manager.dart';
 import 'package:deflect_generator/src/template/class_reflection_data.dart';
@@ -18,7 +18,7 @@ class ClassCollector {
 
     /// prepare class info
     int classNameId = StringDictManager.registerString(class_.name);
-    int classId = ClassDictManager.registerClass(
+    int classId = TypeDictManager.registerType(
       class_.id,
       class_.name,
       class_.source.uri.toString().replaceFirst("asset", "package").replaceFirst("lib/", ""),
@@ -31,7 +31,7 @@ class ClassCollector {
     int superTypeId = -1;
 
     if (superTypeElement != null) {
-      superTypeId = ClassDictManager.registerClass(
+      superTypeId = TypeDictManager.registerType(
         superTypeElement.id,
         superTypeElement.name,
         superTypeElement.source.uri
@@ -53,7 +53,7 @@ class ClassCollector {
 
     List<int> interfaceIds = class_.interfaces
         .map(
-          (e) => ClassDictManager.registerClass(
+          (e) => TypeDictManager.registerType(
                 e.element.id,
                 e.element.name,
                 e.element.source.uri
@@ -66,6 +66,8 @@ class ClassCollector {
 
     /// collect all interfaces
 //    class_.interfaces.forEach((e) => collect(e.element));
+    print("${class_.name}: ${privateFields.length}");
+    print("${class_.name}: ${publicFields.length}");
 
     List<FieldReflectionData> privateFieldTemplates = privateFields
         .map(

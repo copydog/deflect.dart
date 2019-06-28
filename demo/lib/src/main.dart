@@ -11,11 +11,14 @@ void main() {
   print("Class: $awesomeClass");
   List<Field> fields = awesomeClass.getFields();
   Field field1Field = awesomeClass.getField("field1");
+  assert(!field1Field.isEnumConstant());
   print("Field value of first: ${fields.first.get(awesome1)}");
   print("Field value of field1: ${awesomeClass.getField("field1").get(awesome1)}");
   field1Field.set(awesome1, "hi2");
   assert(awesome1.field1 == "hi2");
   print("Field declaring class: ${fields.first.getDeclaringClass()}");
+  assert(fields.first.getDeclaringClass() == awesomeClass);
   print("Field type: ${fields.first.getType()}");
   print("Field toString: ${fields.first.toString()}");
+//  assert(awesomeClass.getField("field7").isEnumConstant());
 }

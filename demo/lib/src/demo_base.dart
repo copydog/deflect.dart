@@ -2,13 +2,18 @@ import 'package:demo/src/class2.dart';
 import 'package:demo/src/interface1.dart';
 import 'package:demo/src/interface3.dart';
 
+enum Enum1 {
+  yeah,
+}
+
 class Awesome1 extends Class2 implements Interface1 {
   String field1;
   int field2;
   bool _field3;
   double _field4;
   Type field5;
-  List<Map> field6;
+  List<Map> get field6 => [];
+  Enum1 field7;
 
   @override
   void interface1Method() {}
