@@ -11,11 +11,6 @@ class TypeDictManager {
 
   /// register class
   static int registerType(int typeId, String typeName, String typeImport) {
-    // avoid import wrong dart provided library
-    if (typeImport.startsWith("dart")) {
-      typeImport = typeImport.split("/").first;
-    }
-
     if (!_typeIdDict.containsKey(typeId)) {
       _typeIdDict[typeId] = _id;
       _typeNameDict[_id] = typeName;

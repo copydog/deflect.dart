@@ -8,6 +8,7 @@ import 'package:deflect_generator/src/manager/class_reflection_data_manager.dart
 import 'package:deflect_generator/src/manager/string_dict_manager.dart';
 import 'package:deflect_generator/src/template/class_reflection_data.dart';
 import 'package:deflect_generator/src/template/field_reflection_data.dart';
+import 'package:deflect_generator/src/util/path_utils.dart';
 
 class ClassCollector {
   static void collect(ClassElement class_) {
@@ -21,7 +22,7 @@ class ClassCollector {
     int classId = TypeDictManager.registerType(
       class_.id,
       class_.name,
-      class_.source.uri.toString().replaceFirst("asset", "package").replaceFirst("lib/", ""),
+      PathUtils.getImportPath(class_.source),
     );
     ClassElement superTypeElement = class_.supertype?.element;
 
@@ -34,10 +35,7 @@ class ClassCollector {
       superTypeId = TypeDictManager.registerType(
         superTypeElement.id,
         superTypeElement.name,
-        superTypeElement.source.uri
-            .toString()
-            .replaceFirst("asset", "package")
-            .replaceFirst("lib/", ""),
+        PathUtils.getImportPath(superTypeElement.source),
       );
     }
 
@@ -56,10 +54,7 @@ class ClassCollector {
           (e) => TypeDictManager.registerType(
                 e.element.id,
                 e.element.name,
-                e.element.source.uri
-                    .toString()
-                    .replaceFirst("asset", "package")
-                    .replaceFirst("lib/", ""),
+                PathUtils.getImportPath(e.element.source),
               ),
         )
         .toList();
