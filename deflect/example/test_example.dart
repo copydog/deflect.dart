@@ -1,5 +1,3 @@
-import 'A.dart';
-
 void main() {}
 
 bool isTypeOf<ThisType, OfType>() => _Instance<ThisType>() is _Instance<OfType>;

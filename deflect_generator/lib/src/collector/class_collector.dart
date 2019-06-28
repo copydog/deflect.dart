@@ -8,6 +8,7 @@ import 'package:deflect_generator/src/manager/class_reflection_data_manager.dart
 import 'package:deflect_generator/src/manager/string_dict_manager.dart';
 import 'package:deflect_generator/src/template/class_reflection_data.dart';
 import 'package:deflect_generator/src/template/field_reflection_data.dart';
+import 'package:deflect_generator/src/util/modifier_utils.dart';
 import 'package:deflect_generator/src/util/path_utils.dart';
 
 class ClassCollector {
@@ -65,7 +66,14 @@ class ClassCollector {
         .map(
           (e) => FieldReflectionData(
                 classId,
-                0x000001,
+                ModifierUtils.getFieldModifiers(
+                  e.isPublic && !e.hasProtected,
+                  e.hasProtected,
+                  e.isPrivate,
+                  e.isStatic,
+                  e.isConst,
+                  e.isFinal,
+                ),
                 StringDictManager.registerString(e.name),
                 TypeDictManager.registerType(
                   e.id,
@@ -79,23 +87,30 @@ class ClassCollector {
         )
         .toList();
 
-    List<FieldReflectionData> publicFieldTemplates = publicFields.map(
-      (e) {
-        return FieldReflectionData(
-          classId,
-          0x000001,
-          StringDictManager.registerString(e.name),
-          TypeDictManager.registerType(
-            e.id,
-            e.type.name,
-            PathUtils.getImportPath(e.type.element.source),
-          ),
-          FieldAccessorDictManager.registerAccessor(e.name),
-          e.isEnumConstant ? 1 : 0,
-          e.isSynthetic ? 1 : 0,
-        );
-      },
-    ).toList();
+    List<FieldReflectionData> publicFieldTemplates = publicFields
+        .map(
+          (e) => FieldReflectionData(
+                classId,
+                ModifierUtils.getFieldModifiers(
+                  e.isPublic && !e.hasProtected,
+                  e.hasProtected,
+                  e.isPrivate,
+                  e.isStatic,
+                  e.isConst,
+                  e.isFinal,
+                ),
+                StringDictManager.registerString(e.name),
+                TypeDictManager.registerType(
+                  e.id,
+                  e.type.name,
+                  PathUtils.getImportPath(e.type.element.source),
+                ),
+                FieldAccessorDictManager.registerAccessor(e.name),
+                e.isEnumConstant ? 1 : 0,
+                e.isSynthetic ? 1 : 0,
+              ),
+        )
+        .toList();
 
     /// register data
     ClassReflectionDataManager.registerClassReflectionData(
