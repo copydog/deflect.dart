@@ -1,15 +1,28 @@
 import 'package:deflect/src/class.dart';
-import 'package:deflect/src/constant/field_reflection_data_constants.dart';
 import 'package:deflect/src/reflect/modifier.dart';
 import 'package:deflect/src/reflection_data/reflection_data_manager.dart';
+
 import 'member.dart';
 
+//@sealed
 class Field implements Member {
-  int get _accessorId => _fieldRD[FieldReflectionDataConstants.ACCESSOR_ID];
+  Class _declaringClass;
+  int _modifiers;
+  String _name;
+  Class _type;
+  int _accessorId;
+  bool _isEnumConstant;
+  bool _isSynthetic;
 
-  List<dynamic> _fieldRD = [];
-
-  Field(this._fieldRD);
+  Field(
+    this._declaringClass,
+    this._modifiers,
+    this._name,
+    this._type,
+    this._accessorId,
+    this._isEnumConstant,
+    this._isSynthetic,
+  );
 
   bool equals(Object obj) {
     if (obj != null && obj is Field) {
@@ -31,13 +44,9 @@ class Field implements Member {
 
   double getDouble(Object obj) => get(obj);
 
-  Class getType() {
-    return null;
-  }
+  Class getType() => _type;
 
-  bool isEnumConstant() {
-    return _fieldRD[FieldReflectionDataConstants.IS_ENUM_CONSTANT] == 1;
-  }
+  bool isEnumConstant() => _isEnumConstant;
 
   void set(Object obj, Object value) {
     ReflectionDataManager.getFieldSetter(_accessorId)(obj, value);
@@ -60,24 +69,14 @@ class Field implements Member {
   //---------------------------------------------------------------------
 
   @override
-  Class getDeclaringClass() {
-    return null;
-  }
+  Class getDeclaringClass() => _declaringClass;
 
   @override
-  int getModifiers() {
-    return _fieldRD[FieldReflectionDataConstants.MODIFIERS];
-  }
+  int getModifiers() => _modifiers;
 
   @override
-  String getName() {
-    return ReflectionDataManager.getStringById(
-      _fieldRD[FieldReflectionDataConstants.FIELD_NAME_ID],
-    );
-  }
+  String getName() => _name;
 
   @override
-  bool isSynthetic() {
-    return _fieldRD[FieldReflectionDataConstants.IS_SYNTHETIC] == 1;
-  }
+  bool isSynthetic() => _isSynthetic;
 }

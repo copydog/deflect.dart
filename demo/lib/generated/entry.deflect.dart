@@ -5,7 +5,7 @@ import "reflection_data.deflect.dart";
 import "package:deflect/src/reflection_data/reflection_data_manager.dart";
 
 void initDeflect() {
-  ReflectionDataManager.load(
+   ReflectionDataManager.load(
     cd,
     sd,
     fgd,
@@ -13,3 +13,4 @@ void initDeflect() {
     rd,
   );
 }
+    

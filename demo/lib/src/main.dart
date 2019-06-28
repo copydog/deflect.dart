@@ -8,11 +8,14 @@ void main() {
   Awesome1 awesome1 = Awesome1();
   awesome1.field1 = "hi1";
   Class<Awesome1> awesomeClass = deflect(awesome1);
-  print(awesomeClass);
+  print("Class: $awesomeClass");
   List<Field> fields = awesomeClass.getFields();
   Field field1Field = awesomeClass.getField("field1");
-  print(fields.first.get(awesome1));
-  print(awesomeClass.getField("field1").get(awesome1));
+  print("Field value of first: ${fields.first.get(awesome1)}");
+  print("Field value of field1: ${awesomeClass.getField("field1").get(awesome1)}");
   field1Field.set(awesome1, "hi2");
-  print(awesome1.field1);
+  assert(awesome1.field1 == "hi2");
+  print("Field declaring class: ${fields.first.getDeclaringClass()}");
+  print("Field type: ${fields.first.getType()}");
+  print("Field toString: ${fields.first.toString()}");
 }

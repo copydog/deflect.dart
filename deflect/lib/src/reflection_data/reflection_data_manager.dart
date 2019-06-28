@@ -1,3 +1,4 @@
+import 'package:deflect/src/cache/class_cache.dart';
 import 'package:deflect/src/constant/class_reflection_data_constants.dart';
 import 'package:deflect/src/constant/field_reflection_data_constants.dart';
 import 'package:deflect/src/reflect/field.dart';
@@ -58,17 +59,34 @@ class ReflectionDataManager {
 
   static Field getField(int classId, String fieldName) {
     int fieldNameId = getStringId(fieldName);
-    List fieldDict =
-        _classReflectionData[classId][ClassReflectionDataConstants.DECLARED_PUBLIC_FIELDS];
+    List rd = _classReflectionData[classId][ClassReflectionDataConstants.DECLARED_PUBLIC_FIELDS];
+    List fieldRd =
+        rd.firstWhere((e) => e[FieldReflectionDataConstants.FIELD_NAME_ID] == fieldNameId);
     return Field(
-      fieldDict.firstWhere((e) => e[FieldReflectionDataConstants.FIELD_NAME_ID] == fieldNameId),
+      ClassCache.getOrCreate(fieldRd[FieldReflectionDataConstants.CLASS_ID]),
+      -1,
+      getStringById(fieldRd[FieldReflectionDataConstants.FIELD_NAME_ID]),
+      ClassCache.getOrCreate(fieldRd[FieldReflectionDataConstants.FIELD_TYPE_ID]),
+      fieldRd[FieldReflectionDataConstants.ACCESSOR_ID],
+      fieldRd[FieldReflectionDataConstants.IS_ENUM_CONSTANT] == 1,
+      fieldRd[FieldReflectionDataConstants.IS_SYNTHETIC] == 1,
     );
   }
 
   static List<Field> getFields(int classId) {
     return List<Field>.from(
       (_classReflectionData[classId][ClassReflectionDataConstants.DECLARED_PUBLIC_FIELDS] as List)
-          .map((e) => Field(e)),
+          .map(
+        (rd) => Field(
+              ClassCache.getOrCreate(rd[FieldReflectionDataConstants.CLASS_ID]),
+              0,
+              getStringById(rd[FieldReflectionDataConstants.FIELD_NAME_ID]),
+              ClassCache.getOrCreate(rd[FieldReflectionDataConstants.FIELD_TYPE_ID]),
+              rd[FieldReflectionDataConstants.ACCESSOR_ID],
+              rd[FieldReflectionDataConstants.IS_ENUM_CONSTANT] == 1,
+              rd[FieldReflectionDataConstants.IS_SYNTHETIC] == 1,
+            ),
+      ),
     );
   }
 

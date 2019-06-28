@@ -29,5 +29,7 @@ class FieldReflectionData {
         3: _fieldNameId,
         4: _fieldTypeId,
         5: _fieldAccessorId,
+        6: _isEnumConstant,
+        7: _isSynthetic,
       }.values.toList();
 }
