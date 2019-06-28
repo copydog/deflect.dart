@@ -1,4 +1,4 @@
-import '../../class.dart';
+import 'package:deflect/src/class.dart';
 
 /**
  * Member is an interface that reflects identifying information about

@@ -1,8 +1,8 @@
-import 'package:deflect/src/lang/constant/class_reflection_data_constants.dart';
-import 'package:deflect/src/lang/constant/field_reflection_data_constants.dart';
-import 'package:deflect/src/lang/reflect/field.dart';
-import 'package:deflect/src/lang/typedef/field_getter.dart';
-import 'package:deflect/src/lang/typedef/field_setter.dart';
+import 'package:deflect/src/constant/class_reflection_data_constants.dart';
+import 'package:deflect/src/constant/field_reflection_data_constants.dart';
+import 'package:deflect/src/reflect/field.dart';
+import 'package:deflect/src/typedef/field_getter.dart';
+import 'package:deflect/src/typedef/field_setter.dart';
 
 class ReflectionDataManager {
   static List<Type> _classIdDict;

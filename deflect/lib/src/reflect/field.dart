@@ -1,6 +1,7 @@
 import 'package:deflect/src/class.dart';
-import 'package:deflect/src/lang/constant/field_reflection_data_constants.dart';
-import 'package:deflect/src/lang/reflection_data/reflection_data_manager.dart';
+import 'package:deflect/src/constant/field_reflection_data_constants.dart';
+import 'package:deflect/src/reflect/modifier.dart';
+import 'package:deflect/src/reflection_data/reflection_data_manager.dart';
 import 'member.dart';
 
 class Field implements Member {
@@ -34,7 +35,9 @@ class Field implements Member {
     return null;
   }
 
-  bool isEnumConstant() => _fieldRD[FieldReflectionDataConstants.IS_ENUM_CONSTANT] == 1;
+  bool isEnumConstant() {
+    return _fieldRD[FieldReflectionDataConstants.IS_ENUM_CONSTANT] == 1;
+  }
 
   void set(Object obj, Object value) {
     ReflectionDataManager.getFieldSetter(_accessorId)(obj, value);
@@ -49,7 +52,7 @@ class Field implements Member {
   }
 
   String toString() {
-    return "";
+    return Modifier.toPrefixString(getModifiers()) + getName();
   }
 
   //---------------------------------------------------------------------

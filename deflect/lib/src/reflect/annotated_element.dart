@@ -1,6 +1,5 @@
-import '../../class.dart';
-import '../annotation/annotation.dart';
-import '../annotation/annotation_type.dart';
+import 'package:deflect/src/annotation/annotation.dart';
+import 'package:deflect/src/class.dart';
 
 /**
  * Represents an annotated element of the program currently running in this

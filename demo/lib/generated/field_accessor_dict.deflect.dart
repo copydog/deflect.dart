@@ -1,0 +1,2 @@
+var fgd = [(i)=>i.hashCode,(i)=>i.runtimeType,(i)=>i.interface1Field,(i)=>i.interface3Field,(i)=>i.field1,(i)=>i.field2,(i)=>i.field5,(i)=>i.field6,(i)=>i.field11,(i)=>i.field12,(i)=>i.field15,(i)=>i.field16,(i)=>i.interface5Field];
+var fsd = [(i,d)=>i.hashCode=d,(i,d)=>i.runtimeType=d,(i,d)=>i.interface1Field=d,(i,d)=>i.interface3Field=d,(i,d)=>i.field1=d,(i,d)=>i.field2=d,(i,d)=>i.field5=d,(i,d)=>i.field6=d,(i,d)=>i.field11=d,(i,d)=>i.field12=d,(i,d)=>i.field15=d,(i,d)=>i.field16=d,(i,d)=>i.interface5Field=d];

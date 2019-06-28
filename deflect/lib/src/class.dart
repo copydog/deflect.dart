@@ -1,11 +1,10 @@
-import 'package:deflect/src/lang/reflect/annotated_element.dart';
+import 'package:deflect/src/reflect/annotated_element.dart';
 
-import 'package:deflect/src/lang/annotation/annotation.dart';
-import 'package:deflect/src/lang/reflect/annotated_element.dart';
-import 'package:deflect/src/lang/reflect/constructor.dart';
-import 'package:deflect/src/lang/reflect/field.dart';
-import 'package:deflect/src/lang/reflect/method.dart';
-import 'package:deflect/src/lang/reflection_data/reflection_data_manager.dart';
+import 'package:deflect/src/annotation/annotation.dart';
+import 'package:deflect/src/reflect/constructor.dart';
+import 'package:deflect/src/reflect/field.dart';
+import 'package:deflect/src/reflect/method.dart';
+import 'package:deflect/src/reflection_data/reflection_data_manager.dart';
 
 class Class<T> implements AnnotatedElement {
   static final int ANNOTATION = 0x00002000;
@@ -13,8 +12,6 @@ class Class<T> implements AnnotatedElement {
   static final int SYNTHETIC = 0x00001000;
 
   int _classId;
-
-  T t1;
 
   Class([T obj]) {
     _classId = ReflectionDataManager.getClassTypeId(T);
