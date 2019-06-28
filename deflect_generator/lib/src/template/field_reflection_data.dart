@@ -24,12 +24,12 @@ class FieldReflectionData {
   );
 
   List toJson() => {
-        1: _classId,
-        2: _modifiers,
-        3: _fieldNameId,
-        4: _fieldTypeId,
-        5: _fieldAccessorId,
-        6: _isEnumConstant,
-        7: _isSynthetic,
+        0: _classId,
+        1: _modifiers,
+        2: _fieldNameId,
+        3: _fieldTypeId,
+        4: _fieldAccessorId,
+        5: _isEnumConstant,
+        6: _isSynthetic,
       }.values.toList();
 }

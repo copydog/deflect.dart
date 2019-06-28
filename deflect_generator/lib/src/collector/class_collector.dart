@@ -64,10 +64,7 @@ class ClassCollector {
         )
         .toList();
 
-    /// collect all interfaces
-//    class_.interfaces.forEach((e) => collect(e.element));
-    print("${class_.name}: ${privateFields.length}");
-    print("${class_.name}: ${publicFields.length}");
+    class_.interfaces.forEach((e) => collect(e.element));
 
     List<FieldReflectionData> privateFieldTemplates = privateFields
         .map(
@@ -83,19 +80,20 @@ class ClassCollector {
         )
         .toList();
 
-    List<FieldReflectionData> publicFieldTemplates = publicFields
-        .map(
-          (e) => FieldReflectionData(
-                classId,
-                0x000001,
-                StringDictManager.registerString(e.name),
-                -1,
-                FieldAccessorDictManager.registerAccessor(e.name),
-                e.isEnumConstant ? 1 : 0,
-                e.isSynthetic ? 1 : 0,
-              ),
-        )
-        .toList();
+    List<FieldReflectionData> publicFieldTemplates = publicFields.map(
+      (e) {
+        return FieldReflectionData(
+          classId,
+          0x000001,
+          StringDictManager.registerString(e.name),
+          -1,
+//          TypeDictManager.registerType(typeId, typeName, typeImport),
+          FieldAccessorDictManager.registerAccessor(e.name),
+          e.isEnumConstant ? 1 : 0,
+          e.isSynthetic ? 1 : 0,
+        );
+      },
+    ).toList();
 
     /// register data
     ClassReflectionDataManager.registerClassReflectionData(

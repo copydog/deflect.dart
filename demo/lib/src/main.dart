@@ -20,5 +20,5 @@ void main() {
   assert(fields.first.getDeclaringClass() == awesomeClass);
   print("Field type: ${fields.first.getType()}");
   print("Field toString: ${fields.first.toString()}");
-//  assert(awesomeClass.getField("field7").isEnumConstant());
+  assert(awesomeClass.getField("field6").isSynthetic());
 }
