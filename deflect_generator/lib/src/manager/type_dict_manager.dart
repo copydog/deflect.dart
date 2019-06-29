@@ -4,7 +4,6 @@ class TypeDictManager {
 
   static Map<int, String> _typeImportDict = {};
 
-  /// string dict that holds string and it's id
   static Map<int, int> _typeIdDict = {};
 
   static Map<int, String> _typeNameDict = {};
@@ -14,10 +13,7 @@ class TypeDictManager {
   }
 
   static int getTypeId(int id) {
-    assert(_typeIdDict.containsKey(id));
-    int typeId = _typeIdDict[id];
-    assert(typeId != null);
-    return typeId;
+    return _typeIdDict[id] ?? -1;
   }
 
   /// register class

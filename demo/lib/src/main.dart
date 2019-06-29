@@ -8,6 +8,7 @@ void main() {
   Awesome1 awesome1 = Awesome1();
   awesome1.field1 = "hi1";
   Class<Awesome1> awesomeClass = deflect(awesome1);
+  Class<Object> objectClass = deflect(Object);
   print("Class: $awesomeClass");
   List<Field> fields = awesomeClass.getFields();
   Field field1Field = awesomeClass.getField("field1");
@@ -20,6 +21,11 @@ void main() {
   assert(fields.first.getDeclaringClass() == awesomeClass);
   print("Field type: ${fields.first.getType()}");
   print("Field toString: ${fields.first.toString()}");
+  // check synthetic
   assert(awesomeClass.getField("field6").isSynthetic());
+  // check isPublic to check modifiers
   assert(Modifier.isPublic(awesomeClass.getField("field6").getModifiers()));
+  // check
+  assert(objectClass.getField("hashCode") != null);
+  assert(awesomeClass.getField("hashCode") != null);
 }

@@ -29,7 +29,7 @@ class ClassCollector {
 
     if (superTypeElement != null) {
       collect(superTypeElement);
-      superTypeId = TypeDictManager.getTypeId(classId);
+      superTypeId = TypeDictManager.getTypeId(superTypeElement.id);
     }
 
     /// avoid register same data

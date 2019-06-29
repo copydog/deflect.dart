@@ -59,9 +59,17 @@ class Reflection {
   }
 
   static List<Field> getFields(int classId) {
-    return ReflectionUtils.getFieldsFromBytes(
-      _getClassRd(classId)[ClassReflectionDataConstants.DECLARED_PUBLIC_FIELDS],
-    );
+    int nextClassId = classId;
+    List<Field> classFields = [];
+    while (nextClassId != -1) {
+      print(nextClassId);
+      List classRd = _getClassRd(nextClassId);
+      classFields.addAll(ReflectionUtils.getFieldsFromBytes(
+        classRd[ClassReflectionDataConstants.DECLARED_PUBLIC_FIELDS],
+      ));
+      nextClassId = classRd[ClassReflectionDataConstants.SUPER_TYPE];
+    }
+    return classFields;
   }
 
   static FieldGetter getFieldGetter(int accessorId) {
