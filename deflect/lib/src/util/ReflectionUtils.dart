@@ -11,7 +11,7 @@ abstract class ReflectionUtils {
       bytesList.map(
         (rd) => Field(
               ClassCache.getOrCreate(rd[FieldReflectionDataConstants.CLASS_ID]),
-              0,
+              rd[FieldReflectionDataConstants.MODIFIERS],
               Reflection.getStringById(rd[FieldReflectionDataConstants.FIELD_NAME_ID]),
               ClassCache.getOrCreate(rd[FieldReflectionDataConstants.FIELD_TYPE_ID]),
               rd[FieldReflectionDataConstants.ACCESSOR_ID],
