@@ -1,17 +1,20 @@
-name: demo
+name: deflect_test
 description: A starting point for Dart libraries or applications.
 # version: 1.0.0
 # homepage: https://www.example.com
-# author: shallow <email@example.com>
+# author: shallow <775150@qq.com>
 
 environment:
-  sdk: '>=2.0.0 <3.0.0'
+  sdk: '>=2.2.0 <3.0.0'
+
 
 dependencies:
   deflect:
     path: ../deflect
+
 dev_dependencies:
-  test: ^1.0.0
   deflect_generator:
     path: ../deflect_generator
-  build_runner: any
+  pedantic: ^1.0.0
+  test: ^1.0.0
+  build_runner: ^1.6.1
