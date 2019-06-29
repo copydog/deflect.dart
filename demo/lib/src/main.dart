@@ -21,4 +21,5 @@ void main() {
   print("Field type: ${fields.first.getType()}");
   print("Field toString: ${fields.first.toString()}");
   assert(awesomeClass.getField("field6").isSynthetic());
+  assert(Modifier.isPublic(awesomeClass.getField("field6").getModifiers()));
 }

@@ -9,15 +9,26 @@ class TypeDictManager {
 
   static Map<int, String> _typeNameDict = {};
 
+  static bool hasTypeId(int typeId) {
+    return _typeIdDict.containsKey(typeId);
+  }
+
+  static int getTypeId(int id) {
+    assert(_typeIdDict.containsKey(id));
+    int typeId = _typeIdDict[id];
+    assert(typeId != null);
+    return typeId;
+  }
+
   /// register class
-  static int registerType(int typeId, String typeName, String typeImport) {
-    if (!_typeIdDict.containsKey(typeId)) {
-      _typeIdDict[typeId] = _id;
+  static int registerType(int id, String typeName, String typeImport) {
+    if (!_typeIdDict.containsKey(id)) {
+      _typeIdDict[id] = _id;
       _typeNameDict[_id] = typeName;
       _typeImportDict[_id] = typeImport;
       _id++;
     }
-    return _typeIdDict[typeId];
+    return _typeIdDict[id];
   }
 
   /// defensive copy
