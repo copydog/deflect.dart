@@ -44,6 +44,8 @@ class Field implements Member {
 
   double getDouble(Object obj) => get(obj);
 
+  num getNum(Object obj) => get(obj);
+
   Class getType() => _type;
 
   bool isEnumConstant() => _isEnumConstant;
@@ -55,6 +57,8 @@ class Field implements Member {
   void setBoolean(Object obj, bool z) => set(obj, z);
 
   void setDouble(Object obj, bool d) => set(obj, d);
+
+  void setNum(Object obj, bool n) => set(obj, n);
 
   String toGenericString() {
     return null;

@@ -42,7 +42,8 @@ class Reflection {
 
   static Type getClassTypeById(int classId) {
     Type type = _classIdDict[classId];
-    assert(type != null, "Class of Id $classId is NOT found in reflection data.");
+    assert(
+        type != null, "Class of Id $classId is NOT found in reflection data.");
     return type;
   }
 
@@ -54,15 +55,31 @@ class Reflection {
 
   static String getStringById(int stringId) {
     String str = _stringDict[stringId];
-    assert(str != null, "String of Id $stringId is NOT found in reflection data.");
+    assert(
+        str != null, "String of Id $stringId is NOT found in reflection data.");
     return str;
+  }
+
+  static List<Field> getDeclaredFields(int classId) {
+    List<Field> classFields = [];
+    List classRd = _getClassRd(classId);
+    classFields.addAll(
+      ReflectionUtils.getFieldsFromBytes(
+        classRd[ClassReflectionDataConstants.DECLARED_PRIVATE_FIELDS],
+      ),
+    );
+    classFields.addAll(
+      ReflectionUtils.getFieldsFromBytes(
+        classRd[ClassReflectionDataConstants.DECLARED_PUBLIC_FIELDS],
+      ),
+    );
+    return classFields;
   }
 
   static List<Field> getFields(int classId) {
     int nextClassId = classId;
     List<Field> classFields = [];
     while (nextClassId != -1) {
-      print(nextClassId);
       List classRd = _getClassRd(nextClassId);
       classFields.addAll(ReflectionUtils.getFieldsFromBytes(
         classRd[ClassReflectionDataConstants.DECLARED_PUBLIC_FIELDS],
@@ -74,13 +91,15 @@ class Reflection {
 
   static FieldGetter getFieldGetter(int accessorId) {
     FieldGetter fieldGetter = _fieldGetterDict[accessorId];
-    assert(fieldGetter != null, "FieldGetter of Id $accessorId is NOT found in reflection data.");
+    assert(fieldGetter != null,
+        "FieldGetter of Id $accessorId is NOT found in reflection data.");
     return fieldGetter;
   }
 
   static FieldSetter getFieldSetter(int accessorId) {
     FieldSetter fieldSetter = _fieldSetterDict[accessorId];
-    assert(fieldSetter != null, "FieldSetter of Id $accessorId is NOT found in reflection data.");
+    assert(fieldSetter != null,
+        "FieldSetter of Id $accessorId is NOT found in reflection data.");
     return fieldSetter;
   }
 

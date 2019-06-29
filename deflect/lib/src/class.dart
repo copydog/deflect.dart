@@ -44,6 +44,25 @@ class Class<T> implements AnnotatedElement {
     return rd.publicFields = Reflection.getFields(_classId);
   }
 
+  Field getDeclaredField(String name) {
+    if (rd.declaredFields == null) {
+      getDeclaredFields();
+    }
+
+    return rd.declaredFields.firstWhere(
+      (e) => e.getName() == name,
+      orElse: () => null,
+    );
+  }
+
+  List<Field> getDeclaredFields() {
+    if (rd.declaredFields != null) {
+      return rd.declaredFields;
+    }
+
+    return rd.declaredFields = Reflection.getDeclaredFields(_classId);
+  }
+
   //---------------------------------------------------------------------
   // Implementation of AnnotatedElement
   //---------------------------------------------------------------------
@@ -74,7 +93,8 @@ class Class<T> implements AnnotatedElement {
   }
 
   @override
-  List<T> getDeclaredAnnotationsByType<T extends Annotation>(Class<T> annotationClass) {
+  List<T> getDeclaredAnnotationsByType<T extends Annotation>(
+      Class<T> annotationClass) {
     // TODO: implement getDeclaredAnnotationsByType
   }
 

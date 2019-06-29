@@ -1,11 +1,11 @@
 # Read about `build.yaml` at https://pub.dartlang.org/packages/build_config
-#targets:
-#  $default:
-#    builders:
-#      rua_generator|pre_builder:
-#        enabled: true
-#        generate_for:
-#          exclude: ['**.g.dart', 'lib/generated/**']
+targets:
+  $default:
+    builders:
+      deflect_generator|deflect_generator:
+        enabled: true
+        generate_for:
+          exclude: ['lib/generated/**']
 builders:
   deflect_generator:
     import: 'package:deflect_generator/src/builder.dart'
