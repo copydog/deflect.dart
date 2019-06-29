@@ -20,6 +20,6 @@ class ClassCache {
     if (!has(id)) {
       set(id, Class<T>.forId(id));
     }
-    return get(id);
+    return get<T>(id);
   }
 }
