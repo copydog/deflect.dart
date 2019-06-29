@@ -1,6 +1,6 @@
 import 'package:deflect/src/class.dart';
 import 'package:deflect/src/reflect/modifier.dart';
-import 'package:deflect/src/reflection_data/reflection_data_manager.dart';
+import 'package:deflect/src/reflection_data/reflection.dart';
 
 import 'member.dart';
 
@@ -35,7 +35,7 @@ class Field implements Member {
   }
 
   Object get(Object obj) {
-    return ReflectionDataManager.getFieldGetter(_accessorId)(obj);
+    return Reflection.getFieldGetter(_accessorId)(obj);
   }
 
   bool getBoolean(Object obj) => get(obj);
@@ -49,7 +49,7 @@ class Field implements Member {
   bool isEnumConstant() => _isEnumConstant;
 
   void set(Object obj, Object value) {
-    ReflectionDataManager.getFieldSetter(_accessorId)(obj, value);
+    Reflection.getFieldSetter(_accessorId)(obj, value);
   }
 
   void setBoolean(Object obj, bool z) => set(obj, z);

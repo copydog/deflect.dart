@@ -10,3 +10,5 @@ class _Instance<T> {
 void objectToGeneric<T>(T t) => printType<T>();
 
 void printType<T>() => print(T);
+
+class Type {}

@@ -1,5 +1,5 @@
 import 'package:deflect/src/class.dart';
-import 'package:deflect/src/reflection_data/reflection_data_manager.dart';
+import 'package:deflect/src/reflection_data/reflection.dart';
 
 class ClassCache {
   static Map<int, Class> _cache = {};
