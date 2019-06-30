@@ -30,23 +30,23 @@ class AccessorDictManager {
     if (isMethod) {
       if (isStatic) {
         _getterList[str] = "(i)=>p$classPrefixId.${element.name}.$str";
-        _setterList[str] = "_f";
+        _setterList[str] = "f";
       } else {
         _getterList[str] = "(i)=>i.$str";
-        _setterList[str] = "_f";
+        _setterList[str] = "f";
       }
     } else {
       if (isStatic) {
         _getterList[str] = "(i)=>p$classPrefixId.${element.name}.$str";
         if (isImmutable) {
-          _setterList[str] = "_f";
+          _setterList[str] = "f";
         } else {
           _setterList[str] = "(i,d)=>p$classPrefixId.${element.name}.$str=d";
         }
       } else {
         _getterList[str] = "(i)=>i.$str";
         if (isImmutable) {
-          _setterList[str] = "_f";
+          _setterList[str] = "f";
         } else {
           _setterList[str] = "(i,d)=>i.$str=d";
         }
@@ -72,7 +72,7 @@ class AccessorDictManager {
   }
 
   static String getTemplate() {
-    return "${_importHelper.getTemplate()}\n_f(i) {}\n${getGetterTemplate()}\n${getSetterTemplate()}";
+    return "${_importHelper.getTemplate()}\nf(i,d) {}\n${getGetterTemplate()}\n${getSetterTemplate()}";
   }
 }
 
