@@ -1,6 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:deflect_generator/src/manager/class_reflection_data_manager.dart';
-import 'package:deflect_generator/src/manager/field_accessor_dict_manager.dart';
+import 'package:deflect_generator/src/manager/accessor_dict_manager.dart';
 import 'package:deflect_generator/src/manager/string_dict_manager.dart';
 import 'package:deflect_generator/src/manager/type_dict_manager.dart';
 import 'package:deflect_generator/src/template/class_reflection_data.dart';
@@ -39,8 +39,10 @@ class ClassCollector {
 
     /// prepare field info
     List<FieldElement> fields = class_.fields;
-    List<FieldElement> privateFields = fields.where((e) => e.isPrivate).toList();
-    List<FieldElement> publicFields = fields.where((e) => !e.isPrivate).toList();
+    List<FieldElement> privateFields =
+        fields.where((e) => e.isPrivate).toList();
+    List<FieldElement> publicFields =
+        fields.where((e) => !e.isPrivate).toList();
 
     List<int> interfaceIds = class_.interfaces.map(
       (e) {
@@ -68,7 +70,8 @@ class ClassCollector {
           ),
           StringDictManager.registerString(e.name),
           type,
-          FieldAccessorDictManager.registerAccessor(e.name),
+          AccessorDictManager.registerAccessor(
+              e.name, class_, e.isStatic, false, e.isConst || e.isFinal),
           e.isEnumConstant ? 1 : 0,
           e.isSynthetic ? 1 : 0,
         );
@@ -94,7 +97,8 @@ class ClassCollector {
           ),
           StringDictManager.registerString(e.name),
           type,
-          FieldAccessorDictManager.registerAccessor(e.name),
+          AccessorDictManager.registerAccessor(
+              e.name, class_, e.isStatic, e.isConst || e.isFinal),
           e.isEnumConstant ? 1 : 0,
           e.isSynthetic ? 1 : 0,
         );
