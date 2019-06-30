@@ -1,4 +1,5 @@
 import 'package:deflect/src/class.dart';
+import 'package:deflect/src/exception/private_access_exception.dart';
 import 'package:deflect/src/reflect/modifier.dart';
 import 'package:deflect/src/reflection_data/reflection.dart';
 
@@ -35,6 +36,9 @@ class Field implements Member {
   }
 
   Object get(Object obj) {
+    if (_accessorId == -1) {
+      throw new PrivateAccessException();
+    }
     return Reflection.getFieldGetter(_accessorId)(obj);
   }
 
@@ -51,14 +55,19 @@ class Field implements Member {
   bool isEnumConstant() => _isEnumConstant;
 
   void set(Object obj, Object value) {
+    if (_accessorId == -1) {
+      throw new PrivateAccessException();
+    }
     Reflection.getFieldSetter(_accessorId)(obj, value);
   }
 
+  void setInt(Object obj, int i) => set(obj, i);
+
   void setBoolean(Object obj, bool z) => set(obj, z);
 
-  void setDouble(Object obj, bool d) => set(obj, d);
+  void setDouble(Object obj, double d) => set(obj, d);
 
-  void setNum(Object obj, bool n) => set(obj, n);
+  void setNum(Object obj, num n) => set(obj, n);
 
   String toGenericString() {
     return null;
