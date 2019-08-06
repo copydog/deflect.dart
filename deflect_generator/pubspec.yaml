@@ -12,6 +12,7 @@ dependencies:
   build: any
   source_gen: '>=0.8.0'
   build_config: '>=0.3.0'
+  crypto: 2.0.6
   deflect:
     path: ../deflect
 #  path: ^1.4.1

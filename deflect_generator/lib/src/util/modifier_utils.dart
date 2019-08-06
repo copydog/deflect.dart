@@ -3,14 +3,14 @@ import 'package:meta/meta.dart';
 
 @sealed
 abstract class ModifierUtils {
-  static int getFieldModifiers(
-    bool isPublic,
-    bool isProtected,
-    bool isPrivate,
-    bool isStatic,
-    bool isConst,
-    bool isFinal,
-  ) {
+  static int getFieldModifiers({
+    @required bool isPublic,
+    @required bool isProtected,
+    @required bool isPrivate,
+    @required bool isStatic,
+    @required bool isConst,
+    @required bool isFinal,
+  }) {
     int modifier = 0x0;
     if (isPublic) modifier |= Modifier.PUBLIC;
     if (isProtected) modifier |= Modifier.PROTECTED;
