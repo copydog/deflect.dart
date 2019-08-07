@@ -1,11 +1,21 @@
 abstract class CodeUtils {
-  static String getCodeFromMap(Map map) {
+  static String getCode(Object obj, {bool useStringKey = false}) {
+    if (obj is Map) {
+      return getCodeFromMap(obj, useStringKey: useStringKey);
+    } else if (obj is List) {
+      return getCodeFromList(obj);
+    }
+    return "";
+  }
+
+  static String getCodeFromMap(Map map, {bool useStringKey = false}) {
     StringBuffer sb = StringBuffer("{");
     for (MapEntry<Object, Object> me in map.entries) {
       String valueStr;
 
       if (me.value is String) {
-        valueStr = "\"${me.value}\"";
+//        valueStr = "\"${me.value}\"";
+        valueStr = "${me.value}";
       } else if (me.value is Map) {
         valueStr = getCodeFromMap(me.value);
       } else if (me.value is List) {
@@ -14,7 +24,11 @@ abstract class CodeUtils {
         valueStr = me.value.toString();
       }
 
-      sb.write("${me.key}:$valueStr,");
+      if (useStringKey) {
+        sb.write("\"${me.key}\":$valueStr,");
+      } else {
+        sb.write("${me.key}:$valueStr,");
+      }
     }
     sb.write("}");
     return sb.toString().replaceAll(",}", "}");

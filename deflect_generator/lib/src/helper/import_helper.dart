@@ -4,33 +4,23 @@ import 'package:deflect_generator/src/util/path_utils.dart';
 class ImportHelper {
   int _id = 0;
 
-  Map<ClassElement, int> _classDict = {};
-
-  Map<int, String> _importDict = {};
+  List<String> _importDict = [];
 
   ImportHelper() {}
 
   int add(ClassElement class_) {
-    if (_classDict.containsKey(class_)) {
-      return _classDict[class_];
+    String path = PathUtils.getImportPath(class_.source);
+
+    if (_importDict.contains(path)) {
+      return _importDict.indexOf(path);
     }
 
-    _classDict[class_] = _id;
-    _importDict[_id] = PathUtils.getImportPath(class_.source);
+    _importDict.add(path);
 
     return _id++;
   }
 
-  String getTemplate() {
-    return "${_importDict.map((k, v) => MapEntry(k, "import \"$v\" as p$k;")).values.join("\n")}";
+  String toString() {
+    return "${_importDict.map((e) => "import \"$e\" as p${_importDict.indexOf(e)};").join("\n")}";
   }
-}
-
-class ImportObject {
-  final String prefix;
-  final int id;
-  const ImportObject(
-    this.prefix,
-    this.id,
-  );
 }
