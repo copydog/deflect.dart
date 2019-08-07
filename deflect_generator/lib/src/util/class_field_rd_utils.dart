@@ -1,5 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:deflect_generator/src/reflection_data/annotation_rd.dart';
 import 'package:deflect_generator/src/reflection_data/class_field_rd.dart';
+import 'package:deflect_generator/src/util/annotation_utils.dart';
 import 'package:deflect_generator/src/util/dart_type_utils.dart';
 import 'package:deflect_generator/src/util/modifier_utils.dart';
 
@@ -18,7 +20,8 @@ abstract class ClassFieldRdUtils {
       type: "t<${DartTypeUtils.getCode(element.type)}>()",
       isEnumConstant: element.isEnumConstant,
       isSynthetic: element.isSynthetic,
-      annotationRdList: [],
+      annotationRdList:
+          element.metadata.map(AnnotationUtils.createFromFieldElement).toList(),
     );
   }
 }
