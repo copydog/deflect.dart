@@ -1,3 +1,4 @@
+import 'package:deflect_generator/src/util/dart_type_utils.dart';
 import 'package:meta/meta.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:deflect_generator/src/manager/import_manager.dart';
@@ -34,7 +35,8 @@ abstract class ClassManager {
   }
 
   static String getCode() {
-    var finalDict = _classDict.map((k, v) => MapEntry(k.displayName, v));
-    return "${ImportManager.toTemplate()}\nt<T>()=>T;\nvar cd = ${CodeUtils.getCode(finalDict, useStringKey: true)};";
+    var finalDict =
+        _classDict.map((k, v) => MapEntry(DartTypeUtils.getCode(k.type), v));
+    return "${ImportManager.toTemplate()}\nt<T>()=>T;\nvar cd = ${CodeUtils.getCode(finalDict)};";
   }
 }

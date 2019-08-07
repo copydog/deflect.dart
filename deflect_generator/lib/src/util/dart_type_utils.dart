@@ -50,6 +50,10 @@ abstract class DartTypeUtils {
       } else {
         typeName = "p${prefixId}.${type.name}";
       }
+
+      if (type.typeArguments.length == 0) {
+        return "$typeName";
+      }
       return "$typeName<${type.typeArguments.map(getCode).join(",")}>";
     }
 

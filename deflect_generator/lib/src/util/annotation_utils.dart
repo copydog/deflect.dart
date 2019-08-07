@@ -8,7 +8,8 @@ import 'annotation_type_utils.dart';
 
 @sealed
 abstract class AnnotationUtils {
-  static Map getCompressedObject(ElementAnnotation annotation) {
+  static Map<String, Object> getData(ElementAnnotation annotation) {
+    Map<String, Object> data = {};
     ConstantReader annotationReader =
         ConstantReader(annotation.computeConstantValue());
 
@@ -18,7 +19,13 @@ abstract class AnnotationUtils {
     Iterable<FieldElement> fields =
         annotationClass.fields.where((e) => !e.isPrivate);
 
-    for (var field in fields) {}
+    for (var field in fields) {
+      if (annotationReader.peek(field.displayName)?.isLiteral ?? false) {
+        data[field.displayName] =
+            annotationReader.peek(field.displayName).literalValue;
+      }
+    }
+    return data;
   }
 
   static AnnotationRd createFromFieldElement(ElementAnnotation annotation) {
@@ -26,7 +33,7 @@ abstract class AnnotationUtils {
         AnnotationTypeUtils.getClassElement(annotation);
     int prefix = ImportManager.add(annotationClass);
     String type = annotationClass.displayName;
-    Map<String, Object> data = {};
+    Map<String, Object> data = getData(annotation);
 
     // private class will use Null to do the placeholder
     if (type.startsWith("_")) {
