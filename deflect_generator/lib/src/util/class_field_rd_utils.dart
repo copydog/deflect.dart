@@ -15,9 +15,10 @@ abstract class ClassFieldRdUtils {
         isPublic: element.isPublic,
         isPrivate: element.isPrivate,
       ),
-      type: DartTypeUtils.getCode(element.type),
+      type: "t<${DartTypeUtils.getCode(element.type)}>()",
       isEnumConstant: element.isEnumConstant,
       isSynthetic: element.isSynthetic,
+      annotationRdList: [],
     );
   }
 }

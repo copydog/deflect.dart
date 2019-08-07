@@ -1,12 +1,13 @@
+import 'package:meta/meta.dart';
 import 'package:analyzer/dart/element/element.dart';
-import 'package:deflect_generator/src/helper/import_helper.dart';
+import 'package:deflect_generator/src/manager/import_manager.dart';
 import 'package:deflect_generator/src/reflection_data/class_rd.dart';
 import 'package:deflect_generator/src/util/class_rd_utils.dart';
 import 'package:deflect_generator/src/util/code_utils.dart';
+import 'package:deflect_generator/src/util/path_utils.dart';
 
-class ClassManager {
-  static ImportHelper importHelper = new ImportHelper();
-
+@sealed
+abstract class ClassManager {
   static Map<ClassElement, ClassRd> _classDict = {};
 
   /// decide if the given class is already registered
@@ -20,13 +21,20 @@ class ClassManager {
       return;
     }
 
-    importHelper.add(element);
+    // avoid scan generator
+    String classPath = PathUtils.getImportPath(element.source);
+    if (classPath.startsWith("package:deflect_generator/") ||
+        classPath.startsWith("package:deflect/")) {
+      return;
+    }
+
+    ImportManager.add(element);
 
     _classDict[element] = ClassRDUtils.createFromClassElement(element);
   }
 
   static String getCode() {
     var finalDict = _classDict.map((k, v) => MapEntry(k.displayName, v));
-    return "$importHelper\nvar a = ${CodeUtils.getCode(finalDict, useStringKey: true)};";
+    return "${ImportManager.toTemplate()}\nt<T>()=>T;\nvar cd = ${CodeUtils.getCode(finalDict, useStringKey: true)};";
   }
 }

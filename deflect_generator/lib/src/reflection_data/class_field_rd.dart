@@ -1,3 +1,4 @@
+import 'package:deflect_generator/src/reflection_data/annotation_rd.dart';
 import 'package:deflect_generator/src/util/code_utils.dart';
 import 'package:deflect_generator/src/util/string_utils.dart';
 import 'package:meta/meta.dart';
@@ -8,6 +9,7 @@ class ClassFieldRd {
   String type;
   bool isEnumConstant;
   bool isSynthetic;
+  List<AnnotationRd> annotationRdList;
 
   ClassFieldRd({
     @required this.name,
@@ -15,6 +17,7 @@ class ClassFieldRd {
     @required this.type,
     @required this.isEnumConstant,
     @required this.isSynthetic,
+    @required this.annotationRdList,
   });
 
   String toString() {
@@ -24,6 +27,7 @@ class ClassFieldRd {
       "type": type,
       "isEnumConstant": isEnumConstant,
       "isSynthetic": isSynthetic,
+      "annotations": annotationRdList,
     }, useStringKey: true);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:deflect_generator/src/util/code_utils.dart';
 import 'package:meta/meta.dart';
 
 class AnnotationRd {
@@ -9,10 +10,10 @@ class AnnotationRd {
     @required this.data,
   });
 
-  Map toJson() {
-    return {
+  String toString() {
+    return CodeUtils.getCode({
       "type": type,
       "data": data,
-    };
+    }, useStringKey: true);
   }
 }
