@@ -30,13 +30,12 @@ abstract class ClassManager {
     }
 
     ImportManager.add(element);
-
     _classDict[element] = ClassRDUtils.createFromClassElement(element);
   }
 
   static String getCode() {
     var finalDict =
         _classDict.map((k, v) => MapEntry(DartTypeUtils.getCode(k.type), v));
-    return "${ImportManager.toTemplate()}\nt<T>()=>T;\nvar cd = ${CodeUtils.getCode(finalDict)};";
+    return "import \"shared_utils.dart\";\n${ImportManager.toTemplate()}\nvar cd = ${CodeUtils.getCode(finalDict)};";
   }
 }
