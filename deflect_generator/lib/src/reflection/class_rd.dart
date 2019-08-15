@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:deflect_generator/src/util/code_utils.dart';
 import 'package:meta/meta.dart';
 
-import 'package:deflect_generator/src/reflection_data/class_field_rd.dart';
+import 'package:deflect_generator/src/reflection/class_field_rd.dart';
 
 /// Class Reflection Data (RD)
 class ClassRd {

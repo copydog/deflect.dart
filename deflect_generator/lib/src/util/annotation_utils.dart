@@ -1,6 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:deflect_generator/src/manager/import_manager.dart';
-import 'package:deflect_generator/src/reflection_data/annotation_rd.dart';
+import 'package:deflect_generator/src/reflection/annotation_rd.dart';
 import 'package:meta/meta.dart';
 import 'package:source_gen/source_gen.dart';
 

@@ -6,9 +6,10 @@ abstract class InitializerRenderer {
     file.writeAsStringSync(
       [
         "import \"class.rd.dart\";",
-        "import \"package:deflect/deflect.dart\";",
+        "import \"accessor.rd.dart\";",
+        "import \"package:deflect/src/reflection/reflection.dart\";",
         "initDeflect() {",
-        "  Reflection.load(cd);",
+        "  Reflection.load(classesRd: cd, getterDict: gd, setterDict: sd, staticGetterDict: sgd, staticSetterDict: ssd);",
         "}",
       ].join("\n"),
     );

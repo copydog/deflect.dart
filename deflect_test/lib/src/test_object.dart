@@ -1,7 +1,12 @@
 import 'package:meta/meta.dart';
+import 'test_annotation.dart';
 
+@TestAnnotation("TestObjectClass", 1)
 class TestObject {
+  @deprecated
+  @TestAnnotation("TestObjectClass", 1)
   int field1 = 0;
+  @deprecated
   double field2 = 0.0;
   num field3 = 0.0;
   @protected

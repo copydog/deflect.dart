@@ -6,7 +6,7 @@ abstract class SharedUtilsRender {
     file.writeAsStringSync(
       [
         "t<T>()=>T;",
-        "var n=null;",
+        "var n;",
       ].join("\n"),
     );
   }

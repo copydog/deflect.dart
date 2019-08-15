@@ -1,7 +1,7 @@
 import 'package:deflect/deflect.dart';
 import 'package:deflect_test/src/test_object.dart';
 import 'package:test/test.dart';
-import 'package:deflect_test/generated/entry.deflect.dart';
+import '../generated/deflect/deflect.dart';
 
 void main() {
   group("Class Tests", () {
@@ -21,7 +21,7 @@ void main() {
     });
 
     test("No duplicate class generated", () {
-      Object obj = new Object();
+      Object obj = Object();
       Class<Object> objectClass = deflect(obj);
       Class<Object> objectClass2 = deflect<Object>();
       expect(objectClass, objectClass2);

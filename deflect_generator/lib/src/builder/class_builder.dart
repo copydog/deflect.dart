@@ -12,6 +12,8 @@ class ClassBuilder extends Generator {
 
     for (ClassElement class_ in classes) {
       ClassCollector.collect(class_);
+//      print(class_.supertype.element);
+      ClassCollector.collect(class_.supertype.element);
     }
 
     return null;

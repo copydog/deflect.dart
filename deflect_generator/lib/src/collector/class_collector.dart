@@ -3,6 +3,10 @@ import 'package:deflect_generator/src/manager/class_manager.dart';
 
 class ClassCollector {
   static void collect(ClassElement class_) {
+    if (class_ == null) {
+      return;
+    }
+
     /// avoid empty and already registered class
     if (ClassManager.has(class_)) {
       return;

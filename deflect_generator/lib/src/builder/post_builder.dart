@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:build/build.dart';
+import 'package:deflect_generator/src/renderer/accessor_renderer.dart';
 import 'package:deflect_generator/src/renderer/class_rd_renderer.dart';
 import 'package:deflect_generator/src/renderer/initializer_renderer.dart';
 import 'package:deflect_generator/src/renderer/shared_utils_render.dart';
@@ -18,5 +19,6 @@ class PostBuilder extends Generator {
     SharedUtilsRender.render();
     ClassRdRenderer.render();
     InitializerRenderer.render();
+    AccessorRenderer.render();
   }
 }

@@ -1,7 +1,7 @@
 import 'package:deflect/deflect.dart';
 import 'package:deflect_test/src/test_object.dart';
 import 'package:test/test.dart';
-import 'package:deflect_test/generated/entry.deflect.dart';
+import '../generated/deflect/deflect.dart';
 
 void main() {
   group('Field Tests', () {
@@ -10,7 +10,7 @@ void main() {
     });
 
     test("fields", () {
-      Object obj = new Object();
+      Object obj = Object();
       Class<Object> objectClass = deflect(obj);
       expect(objectClass.getFields(), hasLength(2));
       Field hashCodeField = objectClass.getField("hashCode");
@@ -38,7 +38,7 @@ void main() {
       int field3modifiers = objClass.getField("field3").getModifiers();
       expect(field3modifiers, Modifier.PUBLIC);
       int field4modifiers = objClass.getField("field4").getModifiers();
-      expect(field4modifiers, Modifier.PROTECTED);
+      expect(field4modifiers, Modifier.PROTECTED | Modifier.PUBLIC);
       int field5modifiers = objClass.getDeclaredField("_field5").getModifiers();
       expect(field5modifiers, Modifier.PRIVATE);
       int field6modifiers = objClass.getDeclaredField("_field6").getModifiers();

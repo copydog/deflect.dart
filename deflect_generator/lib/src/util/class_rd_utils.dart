@@ -1,5 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
-import 'package:deflect_generator/src/reflection_data/class_rd.dart';
+import 'package:deflect_generator/src/reflection/class_rd.dart';
 import 'package:deflect_generator/src/util/class_field_rd_utils.dart';
 
 /// ClassRD Utils

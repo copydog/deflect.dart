@@ -40,8 +40,10 @@ class ClassReflectionData {
       // interfaces
       ClassReflectionDataConstant.INTERFACES: interfaceIds,
       // fields
-      ClassReflectionDataConstant.DECLARED_PRIVATE_FIELDS: privateFieldReflectionData,
-      ClassReflectionDataConstant.DECLARED_PUBLIC_FIELDS: publicFieldReflectionData,
+      ClassReflectionDataConstant.DECLARED_PRIVATE_FIELDS:
+          privateFieldReflectionData,
+      ClassReflectionDataConstant.DECLARED_PUBLIC_FIELDS:
+          publicFieldReflectionData,
       // methods
       ClassReflectionDataConstant.DECLARED_PRIVATE_METHODS: [],
       ClassReflectionDataConstant.DECLARED_PUBLIC_METHODS: [],

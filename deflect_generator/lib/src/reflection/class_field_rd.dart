@@ -1,4 +1,4 @@
-import 'package:deflect_generator/src/reflection_data/annotation_rd.dart';
+import 'package:deflect_generator/src/reflection/annotation_rd.dart';
 import 'package:deflect_generator/src/util/code_utils.dart';
 import 'package:deflect_generator/src/util/string_utils.dart';
 import 'package:meta/meta.dart';

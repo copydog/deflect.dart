@@ -1,7 +1,7 @@
+import 'package:deflect/deflect.dart';
 import 'package:deflect/src/class.dart';
-import 'package:deflect/src/exception/private_access_exception.dart';
 import 'package:deflect/src/reflect/modifier.dart';
-import 'package:deflect/src/reflection_data/reflection.dart';
+import 'package:deflect/src/reflection/reflection.dart';
 
 import 'member.dart';
 
@@ -11,18 +11,18 @@ class Field implements Member {
   int _modifiers;
   String _name;
   Class _type;
-  int _accessorId;
   bool _isEnumConstant;
   bool _isSynthetic;
+  List _annotations;
 
   Field(
     this._declaringClass,
     this._modifiers,
     this._name,
     this._type,
-    this._accessorId,
     this._isEnumConstant,
     this._isSynthetic,
+    this._annotations,
   );
 
   bool equals(Object obj) {
@@ -36,10 +36,10 @@ class Field implements Member {
   }
 
   Object get(Object obj) {
-    if (_accessorId == -1) {
+    if (_name.startsWith("_")) {
       throw new PrivateAccessException();
     }
-    return Reflection.getFieldGetter(_accessorId)(obj);
+    return Reflection.getFieldValue(obj, _name);
   }
 
   bool getBoolean(Object obj) => get(obj);
@@ -55,10 +55,10 @@ class Field implements Member {
   bool isEnumConstant() => _isEnumConstant;
 
   void set(Object obj, Object value) {
-    if (_accessorId == -1) {
+    if (_name.startsWith("_")) {
       throw new PrivateAccessException();
     }
-    Reflection.getFieldSetter(_accessorId)(obj, value);
+    Reflection.setFieldValue(obj, _name, value);
   }
 
   void setInt(Object obj, int i) => set(obj, i);

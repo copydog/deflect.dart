@@ -1,10 +1,9 @@
-import 'package:deflect/src/reflect/annotated_element.dart';
-
 import 'package:deflect/src/annotation/annotation.dart';
+import 'package:deflect/src/reflect/annotated_element.dart';
 import 'package:deflect/src/reflect/constructor.dart';
 import 'package:deflect/src/reflect/field.dart';
 import 'package:deflect/src/reflect/method.dart';
-import 'package:deflect/src/reflection_data/reflection.dart';
+import 'package:deflect/src/reflection/reflection.dart';
 
 class Class<T> implements AnnotatedElement {
   static final int ANNOTATION = 0x00002000;
@@ -13,13 +12,21 @@ class Class<T> implements AnnotatedElement {
 
   ReflectionData rd = new ReflectionData(0);
 
-  int _classId;
+  Type deflectedType;
 
   Class([T obj]) {
-    _classId = Reflection.getClassTypeId(T);
+    deflectedType = T;
   }
 
-  Class.forId(this._classId);
+  Class.fromType(Type type) {
+    deflectedType = type;
+  }
+
+  operator ==(dynamic other) {
+    return other is Class && this.deflectedType == other.deflectedType;
+  }
+
+  int get hashCode => deflectedType.hashCode;
 
   Class arrayType() {}
 
@@ -41,7 +48,7 @@ class Class<T> implements AnnotatedElement {
       return rd.publicFields;
     }
 
-    return rd.publicFields = Reflection.getFields(_classId);
+    return rd.publicFields = Reflection.getFields(this);
   }
 
   Field getDeclaredField(String name) {
@@ -60,7 +67,7 @@ class Class<T> implements AnnotatedElement {
       return rd.declaredFields;
     }
 
-    return rd.declaredFields = Reflection.getDeclaredFields(_classId);
+    return rd.declaredFields = Reflection.getDeclaredFields(this);
   }
 
   //---------------------------------------------------------------------
